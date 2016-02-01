@@ -91,7 +91,7 @@ vm = new Vue({
             this.editbody = '';
             this.todos.splice(id, 1);
             this.todos.unshift(task);
-            this.edittile = '';
+            this.edittitle = '';
             this.editindex = -1;
         }
     },
