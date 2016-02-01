@@ -35,7 +35,7 @@
                 Tasks
             </div>
         <ol class="list-group">
-            <li v-for="meme in todos" class="list-group-item" v-if="!meme.done" @click="switchtask($index)" track-by="$index">
+            <li v-for="meme in todos" class="list-group-item"  track-by="$index">
                 <div v-if="meme.edit == true">
                     memesa
                 </div>
@@ -44,13 +44,7 @@
                  <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
                  <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
             </li>
-            <li v-for="meme in todos" class="list-group-item disabled" v-if="meme.done" @click="switchtask($index)" track-by="$index">
-                  <h4 class="list-group-item-heading">{{ meme.title }}</h4>
-                <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
-                 <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
-                 <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
-            </li>
-        </ol>
+            </ol>
         </div>
     </div>
 
