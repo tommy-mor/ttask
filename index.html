@@ -1,52 +1,61 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Test file asd</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="custom.css">
-</head>
-<body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <a class="navbar-brand"><i class="glyphicon glyphicon-th-list"></i> Tommy's task app</a>
-  </div>
-</nav>
-<div class="container" id="tasks">
-    <div class="col-md-5" style="">
-        <div class="panel panel-default">
-        <div class="panel-heading">Add a task</div>
-        <form @submit="addTask" class="panel-body">
-            <div class="form-group">
-                <input class="form-control" placeholder="what u need to do" v-model="newTodo"></input>
-                <textarea class="form-control" rows="4" v-model="todobody" placeholder="more detail"></textarea>
+    <head>
+        <meta charset="utf-8">
+        <title>Test file asd</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="custom.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <a class="navbar-brand"><i class="glyphicon glyphicon-th-list"></i> Tommy's task app</a>
+            </div>
+        </nav>
+        <div class="container" id="tasks">
+            <div class="col-md-5" style="">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Add a task</div>
+                    <form @submit="addTask" class="panel-body">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="what u need to do" v-model="newTodo"></input>
+                            <textarea class="form-control" rows="4" v-model="todobody" placeholder="more detail"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary">Add task</button>
+                        <button class="btn" type="button" @click="getdata">get data</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="panel panel-default">
+                    <div v-if="todos.length" class="panel-heading">
+                        Tasks
+                    </div>
+                    <ol class="list-group">
+                        <a v-for="meme in todos" class="list-group-item"  track-by="$index">
+                            <div v-if="editindex == $index" class="form-group">
+                                <form @submit="edittask($index)">
+                                    <input class="form-control" placeholder="what u need to do" v-model="edittitle"></input>
+                                    <textarea class="form-control" rows="4" v-model="editbody" placeholder="more detail" style="margin-bottom: 29px"></textarea>
+                                    <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="finishedit($index)">change</i>
+                                </form>
+                            </div>
+                            <div v-if="$index != editindex">
+                                <h4 class="list-group-item-heading">{{ meme.title }}</h4>
+                                <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
+                                <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
+                                <i class="btn btn-xs btn-default pull-right " v-if="editindex == -1" style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
+                            </div>
+                        </a>
+                    </ol>
+                </div>
             </div>
 
-            <button class="btn btn-primary">Add task</button>
-            <button class="btn" type="button" @click="getdata">get data</button>
-        </form>
-    </div>
-    </div>
-    <div class="col-md-7">
-        <div class="panel panel-default">
-            <div v-if="todos.length" class="panel-heading">
-                Tasks
-            </div>
-        <ol class="list-group">
-            <a v-for="meme in todos" class="list-group-item"  track-by="$index">
-                <h4 class="list-group-item-heading">{{ meme.title }}</h4>
-                <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
-                 <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
-                 <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
-            </a>
-            </ol>
         </div>
-    </div>
 
-</div>
-
-    <script src="bundle.js/bundle.js"></script>
+        <script src="bundle.js/bundle.js"></script>
 
 
-</body>
+    </body>
 </html>

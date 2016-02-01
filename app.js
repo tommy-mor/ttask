@@ -15,6 +15,8 @@ vm = new Vue({
         newTodo: '',
         todobody: '',
         incoming: '',
+        edittitle: '',
+        editbody: '',
         editindex: -1,
         todos: []
     },
@@ -78,7 +80,20 @@ vm = new Vue({
         edittask: function(id) {
             //save current editing window
             this.editindex = id;
+            var temp = this.todos[id];
+            this.editbody = temp.body;
+            this.edittitle = temp.title;
         },
+        finishedit: function(id) {
+            this.$http.put('http://127.0.0.1:5000/del', id);
+            var task = {title: this.editbody, body: this.editbody, done: this.todos[id].done}
+            this.$http.put('http://127.0.0.1:5000/put', task);
+            this.editbody = '';
+            this.todos.splice(id, 1);
+            this.todos.unshift(task);
+            this.edittile = '';
+            this.editindex = -1;
+        }
     },
 });
 vm.use(require('vue-resource'));
