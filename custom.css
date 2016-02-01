@@ -1,0 +1,47 @@
+.glyphicon-ok {
+  position: relative;
+  top: -20px;
+}
+.glyphicon-remove {
+  position: relative;
+  top: -20px;
+}
+
+.glyphicon-edit {
+    position: relative;
+    top: -20px;
+    margin-right: 15px;
+}
+.form-control {
+  margin-top: 10px
+}
+
+.button {
+  border: 2px;
+}
+
+.panel {
+ margin-bottom: 40px
+}
+
+.test {
+ font-family:inherit;
+ font-size:15px;
+ line-height:1.3;
+ color: inherit;
+ background-color:inherit;
+ margin-bottom: 0px;
+ padding: 2px;
+ border: 0;
+ margin: 0 0 0px;
+ border-radius: 0px;
+}
+
+.disabled {
+    cursor: pointer !important;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+

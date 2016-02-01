@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Test file asd</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <a class="navbar-brand"><i class="glyphicon glyphicon-th-list"></i> Tommy's task app</a>
+  </div>
+</nav>
+<div class="container" id="tasks">
+    <div class="col-md-5" style="">
+        <div class="panel panel-default">
+        <div class="panel-heading">Add a task</div>
+        <form @submit="addTask" class="panel-body">
+            <div class="form-group">
+                <input class="form-control" placeholder="what u need to do" v-model="newTodo"></input>
+                <textarea class="form-control" rows="4" v-model="todobody" placeholder="more detail"></textarea>
+            </div>
+
+            <button class="btn btn-primary">Add task</button>
+            <button class="btn" type="button" @click="completeall">complete all tasks</button>
+            <button class="btn btn-danger" type="button" @click="clearcompleted">clear completed <span class="badge">{{ completions.length }}</span></button>
+            <button class="btn" type="button" @click="getdata">get data</button>
+        </form>
+    </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div v-if="todos.length" class="panel-heading">
+                Tasks
+            </div>
+        <ol class="list-group">
+            <li v-for="meme in todos" class="list-group-item" v-if="!meme.done" @click="switchtask($index)" track-by="$index">
+                <div v-if="meme.edit == true">
+                    memesa
+                </div>
+                <h4 class="list-group-item-heading">{{ meme.title }}</h4>
+                <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
+                 <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
+                 <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
+            </li>
+            <li v-for="meme in todos" class="list-group-item disabled" v-if="meme.done" @click="switchtask($index)" track-by="$index">
+                  <h4 class="list-group-item-heading">{{ meme.title }}</h4>
+                <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
+                 <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
+                 <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
+            </li>
+        </ol>
+        </div>
+    </div>
+
+</div>
+
+    <script src="bundle.js/bundle.js"></script>
+
+
+</body>
+</html>
