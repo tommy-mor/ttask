@@ -86,7 +86,7 @@ vm = new Vue({
         },
         finishedit: function(id) {
             this.$http.put('http://127.0.0.1:5000/del', id);
-            var task = {title: this.editbody, body: this.editbody, done: this.todos[id].done}
+            var task = {title: this.edittitle, body: this.editbody, done: this.todos[id].done}
             this.$http.put('http://127.0.0.1:5000/put', task);
             this.editbody = '';
             this.todos.splice(id, 1);
