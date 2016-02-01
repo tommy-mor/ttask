@@ -23,8 +23,6 @@
             </div>
 
             <button class="btn btn-primary">Add task</button>
-            <button class="btn" type="button" @click="completeall">complete all tasks</button>
-            <button class="btn btn-danger" type="button" @click="clearcompleted">clear completed <span class="badge">{{ completions.length }}</span></button>
             <button class="btn" type="button" @click="getdata">get data</button>
         </form>
     </div>
@@ -35,15 +33,12 @@
                 Tasks
             </div>
         <ol class="list-group">
-            <li v-for="meme in todos" class="list-group-item"  track-by="$index">
-                <div v-if="meme.edit == true">
-                    memesa
-                </div>
+            <a v-for="meme in todos" class="list-group-item"  track-by="$index">
                 <h4 class="list-group-item-heading">{{ meme.title }}</h4>
                 <p class="list-group-item-text"> <pre v-if="meme.body" class="test">{{ meme.body }} </pre></p>
                  <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
                  <i class="btn btn-xs btn-default pull-right " style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
-            </li>
+            </a>
             </ol>
         </div>
     </div>

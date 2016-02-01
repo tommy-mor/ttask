@@ -15,6 +15,7 @@ vm = new Vue({
         newTodo: '',
         todobody: '',
         incoming: '',
+        editindex: -1,
         todos: []
     },
 
@@ -75,10 +76,9 @@ vm = new Vue({
             });
         },
         edittask: function(id) {
-            var temp = this.todos[id];
-            temp.edit = true
-            this.todos.$set(id, temp);
-       },
+            //save current editing window
+            this.editindex = id;
+        },
     },
 });
 vm.use(require('vue-resource'));
