@@ -5,7 +5,15 @@ function nl2br(str, is_xhtml) {
     return (str + '')
         .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
+
+
 var Vue = require('vue');
+var mycomp = Vue.extend({
+
+    props: ['data', 'type', 'edit'],
+    template: '#list'
+})
+Vue.component('my-comp', mycomp);
 Vue.use(require('vue-resource'));
 vm = new Vue({
     el: '#tasks',
@@ -38,7 +46,7 @@ vm = new Vue({
         addTask: function(e) {
             e.preventDefault();
             if(this.newTodo) {
-                task = {title:this.newTodo, body: this.todobody, done:false};
+                task = {title:this.newTodo, body: this.todobody, done:false, type:'list'};
                 this.todos.unshift(task);
                 this.newTodo = '';
                 this.todobody = '';
