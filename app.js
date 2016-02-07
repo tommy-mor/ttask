@@ -11,7 +11,27 @@ var Vue = require('vue');
 var mycomp = Vue.extend({
 
     props: ['data', 'type', 'edit'],
-    template: '#list'
+    template: '#list',
+    data: function() {
+        return {
+            edittitle: '',
+            editbody: ''
+        }
+    },
+    methods: {
+        edittask: function(index) {
+            this.edit = true;
+            this.editbody = this.data.body;
+            this.edittitle = this.data.title;
+        },
+        finishedit: function() {
+            this.edit = false;
+            this.data.body = this.editbody;
+            this.data.title = this.edittitle;
+            this.editbody = '';
+            this.edittitle = '';
+        }
+    }
 })
 Vue.component('my-comp', mycomp);
 Vue.use(require('vue-resource'));
@@ -46,7 +66,7 @@ vm = new Vue({
         addTask: function(e) {
             e.preventDefault();
             if(this.newTodo) {
-                task = {title:this.newTodo, body: this.todobody, done:false, type:'list'};
+                task = {title:this.newTodo, body: this.todobody, done:false, type:'text'};
                 this.todos.unshift(task);
                 this.newTodo = '';
                 this.todobody = '';

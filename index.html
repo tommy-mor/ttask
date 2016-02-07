@@ -44,25 +44,31 @@
 
         <script src="bundle.js/bundle.js"></script>
         <template id="list">
-        <div v-if="type == 'text' || !type">
-            <h4 class="list-group-item-heading">{{ data.title }}</h4>
-            <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
-            <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
-            <i class="btn btn-xs btn-default pull-right " v-if="edit == true" style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
-        </div>
-        <div v-if="type == 'list'">
-            <h4 class="list-group-item-heading">{{ data.title }}</h4>
-            <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
-            <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
-            <i class="btn btn-xs btn-default pull-right " v-if="edit == false" style="position:relative; top:-20px"  @click="edittask($index)">edit task</i>
-        </div>
-        <div v-if="edit" class="form-group">
-            <form @submit="edittask($index)">
-                <input class="form-control" placeholder="what u need to do" v-model="edittitle"></input>
-                <textarea class="form-control" rows="4" v-model="editbody" placeholder="more detail" style="margin-bottom: 29px"></textarea>
-                <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="finishedit($index)">change</i>
-            </form>
-        </div>
+            <div v-if="type == 'text' || !type">
+                <!-- everything here is for text type -->
+                <div v-if="!edit">
+                    <h4 class="list-group-item-heading">{{ data.title }}</h4>
+                    <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
+                    <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
+                    <i class="btn btn-xs btn-default pull-right " v-if="edit == false" style="position:relative; top:-20px"  @click="edittask">edit task</i>
+                </div>
+                <div v-if="edit" class="form-group">
+                    <!-- this is for if text type is being edited -->
+                    {{ meme }}
+                    <form @submit="edittask($index)">
+                        <input class="form-control" placeholder="what u need to do" v-model="edittitle"></input>
+                        <textarea class="form-control" rows="4" v-model="editbody" placeholder="more detail" style="margin-bottom: 29px"></textarea>
+                        <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="finishedit($index)">change</i>
+                    </form>
+                </div>
+            </div>
+            <div v-if="type == 'list'">
+                <!-- everything here is for list type -->
+                <h4 class="list-group-item-heading">{{ data.title }}</h4>
+                <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
+                <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask($index)">del</i>
+                <i class="btn btn-xs btn-default pull-right " v-if="edit == false" style="position:relative; top:-20px"  @click="edit = true">edit LIST</i>
+            </div>
         </template>
 
     </body>
