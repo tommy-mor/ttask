@@ -10,7 +10,7 @@ function nl2br(str, is_xhtml) {
 var Vue = require('vue');
 var mycomp = Vue.extend({
 
-    props: ['data', 'type', 'edit'],
+    props: ['data', 'type', 'edit', 'index'],
     template: '#list',
     data: function() {
         return {
@@ -30,6 +30,10 @@ var mycomp = Vue.extend({
             this.data.title = this.edittitle;
             this.editbody = '';
             this.edittitle = '';
+        },
+        removeTask: function(id) {
+            console.log('memes' + id);
+            vm.removeTask(id);
         }
     }
 })
