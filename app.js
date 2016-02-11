@@ -29,19 +29,18 @@ var mycomp = Vue.extend({
     methods: {
         edittask: function(index) {
             this.edit = true;
-            this.editbody = this.data.body;
-            this.edittitle = this.data.title;
         },
-        finishedit: function() {
+        finishedit: function(id) {
             this.edit = false;
-            this.data.body = this.editbody;
-            this.data.title = this.edittitle;
-            this.editbody = '';
-            this.edittitle = '';
+            this.$http.put('http://127.0.0.1:5000/edit/' + this.index, {title:this.newTodo, body: this.todobody, type:'text'}).then(function() {
+                    console.log('sucees of mems hsh');
+                    console.log(this.index);
+                }
+            );
         },
         removeTask: function(id) {
             console.log('memes' + id);
-            vm.removeTask(id);
+            this.$dispatch('deleteT', id);
         }
     }
 });
@@ -108,6 +107,7 @@ vm = new Vue({
         },
         removeTask: function(id) {
             this.todos.splice(id, 1);
+            console.log('---1-1-1-1-',id);
             this.$http.put('http://127.0.0.1:5000/del',id);
         },
         getdata: function() {
