@@ -13,19 +13,13 @@
             </div>
         </nav>
         <div class="container" id="tasks">
-            <div class="col-md-5" style="">
-                <div class="panel panel-default">
+            <div class="col-md-5">
+                <div class="panel panel-default" v-show="true">
                     <div class="panel-heading">Add a task</div>
-                    <form @submit="addTask" class="panel-body">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="what u need to do" v-model="newTodo"></input>
-                            <textarea class="form-control" rows="4" v-model="todobody" placeholder="more detail"></textarea>
-                        </div>
-
-                        <button class="btn btn-primary">Add task</button>
-                        <button class="btn" type="button" @click="getdata">get data</button>
-                    </form>
                 </div>
+                <!-- having this here fks it up-->
+                <my-comp type="text" :edit="true" :index=999> </my-comp>
+                <button class="btn" type="button" @click="getdata">get data</button>
             </div>
             <div class="col-md-7">
                 <div class="panel panel-default">
@@ -35,13 +29,13 @@
                     <ol class="list-group">
                         <a v-for="meme in todos" class="list-group-item"  track-by="$index">
                             <my-comp :data="meme" :type="meme.type" :edit="$index == editindex" :index="$index"></my-comp>
+                            <!--<my-comp type="text" :edit="true" :index=999> </my-comp> -->
                         </a>
                     </ol>
                 </div>
             </div>
 
         </div>
-
         <script src="bundle.js/bundle.js"></script>
         <template id="list">
             <div v-if="type == 'text' || !type">
@@ -71,7 +65,11 @@
                     <i class="btn btn-xs btn-default pull-right " v-if="edit == false" style="position:relative; top:-20px"  @click="edit = true">edit LIST</i>
                 </div>
                 <div v-if="edit">
-                    meme
+                    <!-- temp -->
+                    <input></input>
+                    <input></input>
+                    <input></input>
+                    <input></input>
                 </div>
             </div>
         </template>

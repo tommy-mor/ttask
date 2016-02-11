@@ -9,15 +9,23 @@ function nl2br(str, is_xhtml) {
 
 var Vue = require('vue');
 var mycomp = Vue.extend({
-
-    props: ['data', 'type', 'edit', 'index'],
-    template: '#list',
-    data: function() {
-        return {
-            edittitle: '',
-            editbody: ''
+    props: {
+        type: {
+            type: String,
+        },
+        edit: {
+            type: Boolean,
+        },
+        index: {
+            type: Number,
+        },
+        data: {
+            default: function() {
+                return { body: 'hello', title: 'memes', type: 'text' };
+            }
         }
     },
+    template: '#list',
     methods: {
         edittask: function(index) {
             this.edit = true;
