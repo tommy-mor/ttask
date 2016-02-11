@@ -9,6 +9,7 @@ function nl2br(str, is_xhtml) {
 
 var Vue = require('vue');
 var mycomp = Vue.extend({
+    template: '#list',
     props: {
         type: {
             type: String,
@@ -25,7 +26,6 @@ var mycomp = Vue.extend({
             }
         }
     },
-    template: '#list',
     methods: {
         edittask: function(index) {
             this.edit = true;
@@ -44,12 +44,13 @@ var mycomp = Vue.extend({
             vm.removeTask(id);
         }
     }
-})
-Vue.component('my-comp', mycomp);
+});
 Vue.use(require('vue-resource'));
 vm = new Vue({
     el: '#tasks',
-
+    components: {
+        'my-comp': mycomp
+    },
     data: {
         heading: 'hahaxD',
         newTodo: '',
