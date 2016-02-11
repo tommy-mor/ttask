@@ -52,9 +52,11 @@
             <div class="col-md-5">
                 <div class="panel panel-default" v-show="true">
                     <div class="panel-heading">Add a task</div>
+                    <div class="panel-body">
+                        <my-comp type="text" :edit="true" :index=999>  </my-comp>
+                    </div>
                 </div>
                 <!-- having this here fks it up-->
-                <my-comp type="text" :edit="true" :index=999> </my-comp>
                 <button class="btn" type="button" @click="getdata">get data</button>
             </div>
             <div class="col-md-7">
