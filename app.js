@@ -1,12 +1,3 @@
-
-apiURL = 'http://127.0.0.1:5000/get';
-function nl2br(str, is_xhtml) {
-    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>';
-    return (str + '')
-        .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-}
-
-
 var Vue = require('vue');
 var mycomp = Vue.extend({
     template: '#list',
@@ -15,20 +6,24 @@ var mycomp = Vue.extend({
             type: String,
         },
         edit: {
-            type: Boolean,
+            type: Number,
         },
         index: {
             type: Number,
         },
         data: {
             default: function() {
-                return { body: 'hello', title: 'memes', type: 'text' };
+                return { body: '', title: '', type: 'text', edit: 0 };
             }
         }
     },
     methods: {
         edittask: function(index) {
-            this.edit = true;
+            this.edit = 1;
+        },
+        addtask: function() {
+            this.$dispatch('add-t', this.data);
+            this.data =  { body: '', title: '', type: 'text', edit: 1 };
         },
         finishedit: function(id) {
             this.edit = false;
@@ -40,7 +35,7 @@ var mycomp = Vue.extend({
         },
         removeTask: function(id) {
             console.log('memes' + id);
-            this.$dispatch('deleteT', id);
+            this.$dispatcdatah('deleteT', id);
         }
     }
 });
@@ -65,7 +60,11 @@ vm = new Vue({
         console.log('jsadf');
         this.getdata();
     },
-
+    events: {'add-t': function(data) {
+        console.log(data + ' wamts tp be added');
+        this.todos.unshift(data);
+        this.$http.put('http://127.0.0.1:5000/put', data);
+    }},
 
     computed: {
         completions: function() {
