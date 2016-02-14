@@ -50,7 +50,7 @@
     <head>
         <meta charset="utf-8">
         <title>Test file asd</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap.min.css">
         <link rel="stylesheet" href="custom.css">
     </head>
     <body>
@@ -77,7 +77,7 @@
                     </div>
                     <ol class="list-group">
                         <a v-for="meme in todos" class="list-group-item"  track-by="$index">
-                            <my-comp :data.once="meme" :type="meme.type" :edit="$index == editindex" :index="$index"></my-comp>
+                          <my-comp :data.once="meme" :type="meme.type" :edit="$index == editindex" :index="$index"></my-comp>
                             <!--<my-comp type="text" :edit="true" :index=999> </my-comp> -->
                         </a>
                     </ol>

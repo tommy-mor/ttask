@@ -34,8 +34,7 @@ var mycomp = Vue.extend({
             );
         },
         removeTask: function(id) {
-            console.log('memes' + id);
-            this.$dispatcdatah('deleteT', id);
+            this.$dispatch('deleteT', id);
         }
     }
 });
@@ -60,12 +59,17 @@ vm = new Vue({
         console.log('jsadf');
         this.getdata();
     },
-    events: {'add-t': function(data) {
-        console.log(data + ' wamts tp be added');
-        this.todos.unshift(data);
-        this.$http.put('http://127.0.0.1:5000/put', data);
-    }},
-
+    events: {
+        'add-t': function(input) {
+            console.log(input);
+            this.todos.unshift(input);
+            this.$http.put('http://127.0.0.1:5000/put', input);
+        },
+        'deleteT':  function(input) {
+            console.log(this.input);
+            this.removeTask(this.input);
+        }
+    },
     computed: {
         completions: function() {
             return this.todos.filter(function(task) {
@@ -82,8 +86,8 @@ vm = new Vue({
                 this.newTodo = '';
                 this.todobody = '';
                 this.$http.put('http://127.0.0.1:5000/put', task).then(function(response) {
-            }, function(response) {
-            });
+                }, function(response) {
+                });
             }
         },
         switchtask: function(index) {
@@ -95,7 +99,7 @@ vm = new Vue({
         completeall: function() {
             this.todos.map(function(task) {
                 return task.done = true;
-           });
+            });
             this.$http.put('http://127.0.0.1:5000/clrall', 3);
         },
         clearcompleted: function() {
@@ -105,16 +109,16 @@ vm = new Vue({
             this.$http.put('http://127.0.0.1:5000/clr',3);
         },
         removeTask: function(id) {
-            this.todos.splice(id, 1);
+            this.todos.splice(id, 0);
             console.log('---1-1-1-1-',id);
             this.$http.put('http://127.0.0.1:5000/del',id);
         },
         getdata: function() {
             console.log('starting getdata');
             this.$http.get('http://127.0.0.1:5000/get', function(number) {
-                    console.log(number);
-                    this.$set('todos', number);
-                    return number;
+                console.log(number);
+                this.$set('todos', number);
+                return number;
             });
         },
         edittask: function(id) {
