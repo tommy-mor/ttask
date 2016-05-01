@@ -14,7 +14,7 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('app.js', ['browser'])
+    gulp.watch('app.js', ['browser']);
 });
 
-gulp.task('default', ['watch', 'webserver', 'browser'])
+gulp.task('default', ['watch', 'webserver', 'browser']);

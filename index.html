@@ -1,52 +1,44 @@
 <!doctype html>
 <html lang="en">
-<template id="list">
-           <div v-if="type == 'text' || !type">
-                <!-- everything here is for text type -->
-                <div v-if="!edit == 1">
-                    <h4 class="list-group-item-heading">{{ data.title }}</h4>
-                    <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
-                    <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask(index)">del</i>
-                    <i class="btn btn-xs btn-default pull-right " v-if="edit == 0" style="position:relative; top:-20px"  @click="edittask">edit task</i>
-                    {{index}}
-                </div>
-                <div v-if="edit == 1" class="form-group">
-                    <!-- this is for if text type is being edited -->
-                    <form @submit="finishedit(index)">
-                        <!--change action based on inline ? expression to change from addtask to edit-->
-                        <input class="form-control" placeholder="what u need to do" v-model="data.title"></input>
-                        <textarea class="form-control" rows="4" v-model="data.body" laceholder="more detail" style="margin-bottom: 29px"></textarea>
-                        <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="finishedit(index)">change</i>
-                    </form>
-                </div>
-                <div v-if="edit == 2" class="form-group">
-                    <!-- this is for if text type is being edited -->
-                    <form @submit="addtask(index)">
-                        <!--change action based on inline ? expression to change from addtask to edit-->
-                        <input class="form-control" placeholder="what u need to do" v-model="data.title"></input>
-                        <textarea class="form-control" rows="4" v-model="data.body" placeholder="more detail" style="margin-bottom: 29px"></textarea>
-                        <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="addtask(index)">change</i>
-                    </form>
-                </div>
+    <template id="list">
+        <div v-if="type == 'text' || !type">
+            <!-- everything here is for text type -->
+            <div v-if="!edit == 1">
+                <h4 class="list-group-item-heading">{{ data.title }}</h4>
+                <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
+                <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask(index)">del</i>
+                <i class="btn btn-xs btn-default pull-right " v-if="edit == 0" style="position:relative; top:-20px"  @click="edittask">edit task</i>
+                {{index}}
             </div>
-            <div v-if="type == 'list'">
-                <!-- everything here is for list type -->
-                <div v-if="!edit">
-                    <h4 class="list-group-item-heading">{{ data.title }}</h4>
-                    <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
-                    <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask(index)">del</i>
-                    <i class="btn btn-xs btn-default pull-right " v-if="edit == 0" style="position:relative; top:-20px"  @click="edit = 1">edit LIST</i>
-                </div>
-                <div v-if="edit">
-
-                    <!-- temp -->
-                    <input></input>
-                    <input></input>
-                    <input></input>
-                    <input></input>
-                </div>
+            <div v-if="edit == 1" class="form-group">
+                <!-- this is for if text type is being edited -->
+                <form @submit="finishedit(index)">
+                    <!--change action based on inline ? expression to change from addtask to edit-->
+                    <input class="form-control" placeholder="what u need to do" v-model="data.title"></input>
+                    <textarea class="form-control" rows="4" v-model="data.body" laceholder="more detail" style="margin-bottom: 29px"></textarea>
+                    <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="finishedit(index)">change</i>
+                </form>
             </div>
-        </template>
+            <div v-if="edit == 2" class="form-group">
+                <!-- this is for if text type is being edited -->
+                <form @submit="addtask(index)">
+                    <!--change action based on inline ? expression to change from addtask to edit-->
+                    <input class="form-control" placeholder="what u need to do" v-model="data.title"></input>
+                    <textarea class="form-control" rows="4" v-model="data.body" placeholder="more detail" style="margin-bottom: 29px"></textarea>
+                    <i class="btn btn btn-primary pull-right" style="position:relative; top:-20px"  @click="addtask(index)">change</i>
+                </form>
+            </div>
+        </div>
+        <div v-if="type == 'list'">
+            <!-- everything here is for list type -->
+            <div v-if="!edit">
+                <h4 class="list-group-item-heading">{{ data.title }}</h4>
+                <p class="list-group-item-text"> <pre v-if="data.body" class="test">{{ data.body }} </pre></p>
+                <i class="btn btn-xs btn-danger pull-right" style="position:relative; top:-20px"  @click="removeTask(index)">del</i>
+                <i class="btn btn-xs btn-default pull-right " v-if="edit == 0" style="position:relative; top:-20px"  @click="edit = 1">edit LIST</i>
+            </div>
+        </div>
+    </template>
     <head>
         <meta charset="utf-8">
         <title>Test file asd</title>
@@ -65,7 +57,7 @@
                     <div class="panel-heading">Add a task</div>
                     <div class="panel-body">
                         <my-comp type="text" :edit="2" :index=999>  </my-comp>
-                     </div>
+                    </div>
                 </div>
                 <!-- having this here fks it up-->
                 <button class="btn" type="button" @click="getdata">get data</button>
@@ -77,7 +69,7 @@
                     </div>
                     <ol class="list-group">
                         <a v-for="meme in todos" class="list-group-item"  track-by="$index">
-                          <my-comp :data.once="meme" :type="meme.type" :edit="$index == editindex" :index="$index"></my-comp>
+                            <my-comp :data.sync="meme" :type="meme.type" :edit="$index == editindex" :index="$index"></my-comp>
                             <!--<my-comp type="text" :edit="true" :index=999> </my-comp> -->
                         </a>
                     </ol>
@@ -89,5 +81,4 @@
 
 
     </body>
-    
 </html>

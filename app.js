@@ -13,7 +13,12 @@ var mycomp = Vue.extend({
         },
         data: {
             default: function() {
-                return { body: '', title: '', type: 'text', edit: 0 };
+                return {
+                    body: '',
+                    title: '',
+                    type: 'text',
+                    edit: 0
+                };
             }
         }
     },
@@ -23,21 +28,31 @@ var mycomp = Vue.extend({
         },
         addtask: function() {
             this.$dispatch('add-t', this.data);
-            this.data =  { body: '', title: '', type: 'text', edit: 1 };
+            this.data = {
+                body: '',
+                title: '',
+                type: 'text',
+                edit: 1
+            };
         },
         finishedit: function(id) {
             this.edit = false;
-            this.$http.put('http://127.0.0.1:5000/edit/' + this.index, {title:this.newTodo, body: this.todobody, type:'text'}).then(function() {
-                    console.log('sucees of mems hsh');
-                    console.log(this.index);
-                }
-            );
+            this.$http.put('http://127.0.0.1:5000/edit/' + this.index, {
+                title: this.newTodo,
+                body: this.todobody,
+                type: 'text'
+            }).then(function() {
+                console.log('sucees of mems hsh');
+                console.log(this.index);
+                var a = 23;
+            });
         },
         removeTask: function(id) {
             this.$dispatch('deleteT', id);
         }
     }
 });
+
 Vue.use(require('vue-resource'));
 vm = new Vue({
     el: '#tasks',
@@ -57,17 +72,19 @@ vm = new Vue({
 
     ready: function() {
         console.log('jsadf');
+        console.log('jsadf');
         this.getdata();
     },
     events: {
         'add-t': function(input) {
-            console.log(input);
             this.todos.unshift(input);
+            console.log(input);
             this.$http.put('http://127.0.0.1:5000/put', input);
         },
-        'deleteT':  function(input) {
-            console.log(this.input);
-            this.removeTask(this.input);
+        'deleteT': function(input) {
+            console.log(input);
+            console.log('deleting shit');
+            this.removeTaskParent(input);
         }
     },
     computed: {
@@ -80,14 +97,19 @@ vm = new Vue({
     methods: {
         addTask: function(e) {
             e.preventDefault();
-            if(this.newTodo) {
-                task = {title:this.newTodo, body: this.todobody, done:false, type:'text'};
+            if (this.newTodo) {
+                task = {
+                    title: this.newTodo,
+                    body: this.todobody,
+                    done: false,
+                    type: 'text'
+                };
                 this.todos.unshift(task);
                 this.newTodo = '';
                 this.todobody = '';
-                this.$http.put('http://127.0.0.1:5000/put', task).then(function(response) {
-                }, function(response) {
-                });
+                console.log('asdfask');
+
+                this.$http.put('http://127.0.0.1:5000/put', task).then(function(response) {}, function(response) {});
             }
         },
         switchtask: function(index) {
@@ -106,12 +128,12 @@ vm = new Vue({
             this.todos = this.todos.filter(function(task) {
                 return !task.done;
             });
-            this.$http.put('http://127.0.0.1:5000/clr',3);
+            this.$http.put('http://127.0.0.1:5000/clr', 3);
         },
-        removeTask: function(id) {
-            this.todos.splice(id, 0);
-            console.log('---1-1-1-1-',id);
-            this.$http.put('http://127.0.0.1:5000/del',id);
+        removeTaskParent: function(id) {
+            this.todos.splice(id, 1);
+            console.log('---1-1-1-1-', id);
+            this.$http.put('http://127.0.0.1:5000/del', id);
         },
         getdata: function() {
             console.log('starting getdata');
@@ -130,7 +152,11 @@ vm = new Vue({
         },
         finishedit: function(id) {
             this.$http.put('http://127.0.0.1:5000/del', id);
-            var task = {title: this.edittitle, body: this.editbody, done: this.todos[id].done}
+            var task = {
+                title: this.edittitle,
+                body: this.editbody,
+                done: this.todos[id].done
+            };
             this.$http.put('http://127.0.0.1:5000/put', task);
             this.editbody = '';
             this.todos.splice(id, 1);
