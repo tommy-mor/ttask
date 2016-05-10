@@ -1,4 +1,9 @@
 <!doctype html>
+<!-- key
+     1 - nothing
+     2 - edit for text-normal
+     3 - edit for list
+   -->
 <html lang="en">
     <template id="list">
         <div v-if="type == 'text' || !type">
@@ -48,15 +53,23 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand"> Tommy's task app</a>
+                <a class="navbar-brand">Tommy's task app</a>
             </div>
         </nav>
         <div class="container" id="tasks">
             <div class="col-md-5">
                 <div class="panel panel-default" v-show="true">
-                    <div class="panel-heading">Add a task</div>
+                    <div class="panel-heading">
+                        Add a task
+                        <div class="btn-group align-right test1" role="group" aria-label="...">
+                            <button type="button" @click="settype(2)" class="btn btn-default">text</button>
+                            <button type="button" @click="settype(3)" class="btn btn-default">list</button>
+                            <button type="button" @click="settype(index)" class="btn btn-default">Right</button>
+                        </div>
+                    </div>
                     <div class="panel-body">
                         <my-comp type="text" :edit="2" :index=999>  </my-comp>
+
                     </div>
                 </div>
                 <!-- having this here fks it up-->

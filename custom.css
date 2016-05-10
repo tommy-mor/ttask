@@ -23,7 +23,9 @@
 .panel {
  margin-bottom: 40px
 }
-
+.test1 {
+    float:right;
+}
 .test {
  font-family:inherit;
  font-size:15px;

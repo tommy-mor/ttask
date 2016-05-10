@@ -17,7 +17,6 @@ var mycomp = Vue.extend({
                     body: '',
                     title: '',
                     type: 'text',
-                    edit: 0
                 };
             }
         }
@@ -34,6 +33,9 @@ var mycomp = Vue.extend({
                 type: 'text',
                 edit: 1
             };
+        },
+        settyped: function(num){
+            this.edit = num;
         },
         finishedit: function(id) {
             this.edit = false;
